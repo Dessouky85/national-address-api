@@ -12,8 +12,8 @@ export default async function handler(req, res) {
     const response = await fetch(fullUrl, {
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer YOUR_API_KEY', // Uncomment if SPL requires it
-      },
+        // 'Authorization': 'Bearer YOUR_API_KEY' // Add this if SPL requires auth
+      }
     });
 
     if (!response.ok) {
