@@ -9,9 +9,19 @@ export default async function handler(req, res) {
   const fullUrl = `${apiUrl}?format=json&language=en&shortaddress=${shortaddress}`;
 
   try {
-    const response = await fetch(fullUrl);
-    const data = await response.json();
+    const response = await fetch(fullUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': 'Bearer YOUR_API_KEY', // Uncomment if SPL requires it
+      },
+    });
 
+    if (!response.ok) {
+      const errorBody = await response.text();
+      return res.status(response.status).json({ error: "SPL API error", body: errorBody });
+    }
+
+    const data = await response.json();
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch address", details: error.message });
