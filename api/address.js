@@ -12,8 +12,8 @@ export default async function handler(req, res) {
     const response = await fetch(fullUrl, {
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer YOUR_API_KEY' // Add this if SPL requires auth
-      }
+        'api_key': process.env.SPL_API_KEY, // Add your SPL subscription key in Vercel env
+      },
     });
 
     if (!response.ok) {
